@@ -43,7 +43,7 @@ constructor() {
 export class orderModel {
   SaleId: number;
   CustId: number;
-  SaleDate: string;
+  SaleDate: Date;
   TotalInvoiceAmount: number;
   Discount: number;
   PaymentNaration: string;
@@ -58,7 +58,7 @@ export class orderModel {
 constructor() {
  this. SaleId= 0;
  this. CustId=  0;
- this. SaleDate= '';
+ this. SaleDate= new Date();
  this. TotalInvoiceAmount= 0;
  this. Discount= 0;
  this. PaymentNaration= '';

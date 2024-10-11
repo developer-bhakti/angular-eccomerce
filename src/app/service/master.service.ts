@@ -1,4 +1,4 @@
-import { CartModel, Category, Customer, LoginModel } from './../model/product';
+import { CartModel, Category, Customer, LoginModel, orderModel } from './../model/product';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
@@ -61,6 +61,12 @@ export class MasterService {
   deleteProductFromCartById(cartId: number): Observable<APIResponsModel>{
     const url = `${this.apiUrl}DeleteProductFromCartById?id=${cartId}`;
     return this.http.get<APIResponsModel>(url)
+  }
+
+  onPlaceOrder(obj: orderModel): Observable<APIResponsModel>{
+    debugger;
+    const url = `${this.apiUrl}PlaceOrder`;
+    return this.http.post<APIResponsModel>(url, obj)
   }
 
 }
