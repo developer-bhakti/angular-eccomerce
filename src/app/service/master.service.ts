@@ -1,7 +1,7 @@
 import { CartModel, Category, Customer, LoginModel } from './../model/product';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { APIResponsModel } from '../model/product';
 
 @Injectable({
@@ -11,7 +11,16 @@ export class MasterService {
 
   apiUrl: string = 'https://freeapi.miniprojectideas.com/api/BigBasket/';
 
-  constructor(private http: HttpClient) { }
+  onCartAdded: Subject<boolean> = new Subject<boolean>();
+  loggedUserData: Customer = new Customer();
+
+  constructor(private http: HttpClient) {
+    const isUser = localStorage.getItem('Constant.LOCAL_KEY');
+      if(isUser != null){
+        const parsObj = JSON.parse(isUser);
+        this.loggedUserData = parsObj;
+      }
+   }
 
   getAllProducts(): Observable<APIResponsModel>{
     return this.http.get<APIResponsModel>(this.apiUrl + "GetAllProducts")
@@ -43,4 +52,16 @@ export class MasterService {
     const url = `${this.apiUrl}Login`;
     return this.http.post<APIResponsModel>(url, obj)
   }
+
+  getCartProductsByCustomerId(loggedUserId: number): Observable<APIResponsModel>{
+    const url = `${this.apiUrl}GetCartProductsByCustomerId?id=${loggedUserId}`;
+    return this.http.get<APIResponsModel>(url)
+  }
+
+  deleteProductFromCartById(cartId: number): Observable<APIResponsModel>{
+    const url = `${this.apiUrl}DeleteProductFromCartById?id=${cartId}`;
+    return this.http.get<APIResponsModel>(url)
+  }
+
 }
+

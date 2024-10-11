@@ -19,17 +19,15 @@ export class ProductsComponent implements OnInit, OnDestroy{
 ProductList = signal<ProductList []>([]);
 
 CategoryList$: Observable<Category[]> = new Observable<Category[]>();
+
 subscriptionList: Subscription[]= [];
 
 MasterService = inject(MasterService);
-loggedUserData: Customer = new Customer();
+
+
 
 constructor() {
-  const isUser = localStorage.getItem('Constant.LOCAL_KEY');
-      if(isUser != null){
-        const parsObj = JSON.parse(isUser);
-        this.loggedUserData = parsObj;
-      }
+
 }
 
   ngOnInit(): void {
@@ -55,10 +53,12 @@ onAddToCart(id: number){
   debugger;
   const newObj : CartModel = new CartModel();
   newObj.ProductId = id;
-  newObj.CustId = this.loggedUserData.custId;
+  newObj.CustId= 1642;
+  newObj.CustId = this.MasterService. loggedUserData.custId;
   this.MasterService.addtocart(newObj).subscribe((res:APIResponsModel)=>{
    if(res.result){
-    alert("Product Added to Cart")
+    alert("Product Added to Cart");
+    this.MasterService.onCartAdded.next(true);
    } else{
     alert(res.message)
    }

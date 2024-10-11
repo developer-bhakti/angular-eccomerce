@@ -80,7 +80,40 @@
 
               <table class="table table-sm">
                   <tbody>
-                      <tr>
+                  @for (item of cartData; track $index) {
+                    <tr>
+                      <td>
+                          <div class="rounded"
+                              style="background-image: url({{item.productImageUrl}}); width: 60px; height: 60px; background-size: cover;">
+                          </div>
+                      </td>
+                      <td class="align-middle text-left">{{item.productName}}</td>
+                      <td class="align-middle text-center">{{item.quantity}} pieces</td>
+                      <td class="align-middle text-right">${{item.productPrice}}</td>
+                      <td class="align-middle text-center">
+                          <a (click)="onRemoveProduct(item.cartId)" data-toggle="modal" data-title="Delete your product ?">
+                              <i class="fa fa-trash"></i>
+                          </a>
+                      </td>
+                  </tr>
+                  }
+
+                      <!-- <tr>
+                          <td>
+                              <div class="rounded"
+                                  style="background-image: url(https://unsplash.com/photos/ZBwQ2bCbJjw/download?force=true&amp;w=640); width: 60px; height: 60px; background-size: cover;">
+                              </div>
+                          </td>
+                          <td class="align-middle text-left">{{item.productName}}</td>
+                          <td class="align-middle text-center">{{item.Quantity}} pieces</td>
+                          <td class="align-middle text-right">${{item.productPrice}}</td>
+                          <td class="align-middle text-center">
+                              <a href="#delete" data-toggle="modal" data-title="Delete your product ?">
+                                  <i class="fa fa-trash"></i>
+                              </a>
+                          </td>
+                      </tr> -->
+                      <!-- <tr>
                           <td>
                               <div class="rounded"
                                   style="background-image: url(https://unsplash.com/photos/ZBwQ2bCbJjw/download?force=true&amp;w=640); width: 60px; height: 60px; background-size: cover;">
@@ -94,37 +127,7 @@
                                   <i class="fa fa-trash"></i>
                               </a>
                           </td>
-                      </tr>
-                      <tr>
-                          <td>
-                              <div class="rounded"
-                                  style="background-image: url(https://unsplash.com/photos/ZBwQ2bCbJjw/download?force=true&amp;w=640); width: 60px; height: 60px; background-size: cover;">
-                              </div>
-                          </td>
-                          <td class="align-middle text-left">Spy Suit</td>
-                          <td class="align-middle text-center">1 pieces</td>
-                          <td class="align-middle text-right">$698</td>
-                          <td class="align-middle text-center">
-                              <a href="#delete" data-toggle="modal" data-title="Delete your product ?">
-                                  <i class="fa fa-trash"></i>
-                              </a>
-                          </td>
-                      </tr>
-                      <tr>
-                          <td>
-                              <div class="rounded"
-                                  style="background-image: url(https://unsplash.com/photos/ZBwQ2bCbJjw/download?force=true&amp;w=640); width: 60px; height: 60px; background-size: cover;">
-                              </div>
-                          </td>
-                          <td class="align-middle text-left">Spy Suit</td>
-                          <td class="align-middle text-center">1 pieces</td>
-                          <td class="align-middle text-right">$698</td>
-                          <td class="align-middle text-center">
-                              <a href="#delete" data-toggle="modal" data-title="Delete your product ?">
-                                  <i class="fa fa-trash"></i>
-                              </a>
-                          </td>
-                      </tr>
+                      </tr> -->
 
                       <tr>
                           <td colspan="4" class="align-middle text-right">Quantity</td>
@@ -134,8 +137,14 @@
                           <td colspan="4" class="align-middle text-right">Total</td>
                           <td class="align-middle text-right">3600</td>
                       </tr>
+
                   </tbody>
               </table>
+              <div class="row">
+                <div class="col-12 text-end">
+                   <button class="btn btn-sm btn-primary" (click)="isCartPopupOpen = false" [routerLink]="['/create-order']" routerLinkActive="router-link-active" >Checkout</button>
+                </div>
+            </div>
           </div>
       </div>
   </div>
