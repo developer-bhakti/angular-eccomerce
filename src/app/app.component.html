@@ -57,7 +57,7 @@
           <!-- Icon -->
            @if(loggedUserData.custId == 0) {
             <button class="btn btn-success btn-sm" (click)="openLoginModel()">Login</button>
-            <button class="btn btn-success btn-sm mx-2" (click)="openRagisterModel()">Ragister</button>
+            <button class="btn btn-success btn-sm mx-2" (click)="openRegisterModel()">Ragister</button>
            } @else{
             <button class="btn btn-primary btn-sm">{{loggedUserData.name}}</button>
             <button class="btn btn-warning btn-sm mx-2" (click)="logOff()">LogOff</button>
@@ -130,12 +130,12 @@
                       </tr> -->
 
                       <tr>
-                          <td colspan="4" class="align-middle text-right">Quantity</td>
-                          <td class="align-middle text-right">55</td>
+                        <td colspan="4" class="align-middle text-right">Quantity</td>
+                        <td class="align-middle text-right">{{ totalQuantity }}</td>
                       </tr>
                       <tr>
-                          <td colspan="4" class="align-middle text-right">Total</td>
-                          <td class="align-middle text-right">3600</td>
+                        <td colspan="4" class="align-middle text-right">Total</td>
+                        <td class="align-middle text-right">${{ totalPrice }}</td>
                       </tr>
 
                   </tbody>
@@ -199,7 +199,7 @@
       <!-- Modal Header -->
       <div class="modal-header">
         <h4 class="modal-title">Ragister Modal</h4>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="closeRagisterModel()"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="closeRegisterModel()"></button>
       </div>
 
       <!-- Modal body -->
@@ -222,7 +222,7 @@
 
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="closeRagisterModel()">Close</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="closeRegisterModel()">Close</button>
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="onRegister()">Register</button>
       </div>
 
